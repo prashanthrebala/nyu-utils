@@ -33,11 +33,16 @@ def parse_instruction(instruction):
         return f"{imm(params[3])}{reg(params[2])}111{reg(params[1])}0010011"
     if params[0] == "lw":
         im, rs1 = params[2].split('(x')
-        return f"{imm(im)}{reg(rs1[:-1])}010{reg(params[1])}0000011"
+        return f"{imm(im)}{reg(rs1[:-1])}000{reg(params[1])}0000011"
     # UJ type
     # TODO: jal instruction
     # B type
-    # TODO: bne and beq instruction
+    if params[0] == "beq":
+        im = imm(params[3])
+        return f"{im[0]}{im[2:8]}{reg(params[2])}{reg(params[1])}000{im[8:12]}{im[1]}1100011"
+    if params[0] == "bne":
+        im = imm(params[3])
+        return f"{im[0]}{im[2:8]}{reg(params[2])}{reg(params[1])}001{im[8:12]}{im[1]}1100011"
     # S type
     if params[0] == "sw":
         im, rs1 = params[2].split('(x')
@@ -61,4 +66,3 @@ while True:
     print(inst[8:16])
     print(inst[16:24])
     print(inst[24:32])
-
