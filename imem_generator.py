@@ -62,7 +62,7 @@ while True:
     if len(inst) == 0:
         break
     inst = parse_instruction(inst)
-    print(inst[0:8])
-    print(inst[8:16])
-    print(inst[16:24])
-    print(inst[24:32])
+    print(inst[0:7])
+    print(inst[8:15])
+    print(inst[16:23])
+    print(inst[24:31])
